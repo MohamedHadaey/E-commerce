@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Navbar Styles */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  background: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+nav .navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+nav .navbar-logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+nav .navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+nav .navbar-link {
+  text-decoration: none;
+  color: #888;
+  transition: color 0.2s;
+}
+
+nav .navbar-link:hover {
+  color: #333;
+}
+
+.navbar-social {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-social-icon {
+  font-size: 20px;
+}
+
+/* Footer Styles */
+#footer {
+  background: #F0F3F2;
+  padding: 0;
+  border-top: 1px solid #e9ecef;
+}
+
+.footer-content {
+  margin: 0 auto;
+  padding: 30px 50px;
+}
+
+.footer-content h3 {
+  font-size: 30px;
+  font-weight: 200;
+  margin-bottom: 0.5rem;
+}
+
+.footer-content p {
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+}
+
+.footer-form {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.footer-form input[type="email"] {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.footer-form input[type="email"]:focus {
+  border-color: #22c55e;
+}
+
+.main-btn {
+  background: #22c55e;
+  color: #fff;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.footer-form button:hover {
+  background: #16a34a;
+  cursor: pointer;
+
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .footer-links {
+    flex-direction: row;
+    gap: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.footer-links p {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links ul {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.footer-links li {
+  margin: 0;
+}
+
+.footer-links a {
+  color: #6c757d;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #22c55e;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #b0b0b0;
+}
+
+/* App store badges and delivery */
+.footer-apps {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-apps img {
+  height: 2rem;
+}
+
+@media (max-width: 767px) {
+  .footer-content {
+    padding: 32px 8px 0 8px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-apps {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
+
+/* active class for active route */
+.active {
+  color: #22c55e !important;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #22c55e;
+  /* add small shadow */
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+form button:focus {
+  outline: none;
+  border: 0;
+  box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.2);
+}
+
+/* styles to test somethinf on external test page test.html */
+.profile-content .form-section {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 16px 0 rgba(60, 72, 88, 0.08);
+  padding: 20px ;
+  margin-bottom: 20px;
+}
+
+.profile-content .form-section-header {
+  margin-bottom: 24px;
+}
+
+.profile-content .profile-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.profile-content .profile-img img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  background: #f3f4f6;
+}
+
+.profile-content .buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.profile-content .buttons .btn-success {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.profile-content .buttons .btn-success:hover {
+  background: #16a34a;
+}
+
+.profile-content .buttons .btn-danger {
+  background: #fff;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.profile-content .buttons .btn-danger:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.profile-content .form-section-header p {
+  color: #6b7280;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.profile-content .form-section-body .row {
+  gap: 16px 0;
+}
+
+.profile-content .form-section-body input,
+.profile-content .form-section-body select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  font-size: 15px;
+  color: #222;
+  margin-bottom: 18px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.profile-content .form-section-body input:focus,
+.profile-content .form-section-body select:focus {
+  border-color: #22c55e;
+  background: #fff;
+}
+
+.profile-content .form-section-footer {
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.profile-content .form-section-footer .btn-success {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  padding: 8px 32px;
+  border-radius: 8px;
+  margin-left: 12px;
+  transition: background 0.2s;
+}
+
+.profile-content .form-section-footer .btn-success:hover {
+  background: #16a34a;
+}
+
+.profile-content .form-section-footer .btn-danger {
+  background: #fff;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+  font-weight: 500;
+  padding: 8px 32px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.profile-content .form-section-footer .btn-danger:hover {
+  background: #f3f4f6;
+  color: #ef4444;
+}
+
+.profile-content .form-check-input[type="checkbox"] {
+  accent-color: #22c55e;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.profile-content .form-check-label {
+  color: #222;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .profile-content .form-section {
+    padding: 18px 8px;
+  }
+  .profile-content .profile-img img {
+    width: 72px;
+    height: 72px;
+  }
+}
