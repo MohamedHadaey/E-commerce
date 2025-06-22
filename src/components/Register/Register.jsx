@@ -23,7 +23,6 @@ export default function Register() {
 
   // using .then, .catch to send data to backend
   async function registerUser(values) {
-    console.log('register form values', values);
     setSubmitted(true);
     axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
       .then((res) => {

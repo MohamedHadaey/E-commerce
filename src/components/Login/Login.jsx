@@ -19,7 +19,6 @@ export default function Login() {
   const { setToken } = useContext(AuthContext);
   // using .then, .catch to send data to backend
   async function loginUser(values) {
-    console.log('register form values', values);
     setSubmitted(true);
     axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", values)
       .then((res) => {
@@ -29,9 +28,9 @@ export default function Login() {
         setTimeout(() => {
           setSuccess(false);
           navigate('/home');
-          setToken(res.data.token);
           localStorage.setItem('token', res.data.token)
-        }, 3000);
+          setToken(res.data.token);
+        }, 1000);
         console.log('res', res)
       })
       .catch((error) => {
