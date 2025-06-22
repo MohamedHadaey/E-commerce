@@ -7,6 +7,7 @@ import Register from './Components/Register/Register';
 import Notfound from './components/Notfound/Notfound';
 import Products from './Components/Products/Products';
 import Categories from './Components/Categories/Categories';
+import AuthContextProvider from './Context/AuthContext';
 
 function App() {
   const router = createBrowserRouter([
@@ -39,7 +40,9 @@ function App() {
 
   return (
     <>
-    <RouterProvider router={router} />
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </>
   )
 }
