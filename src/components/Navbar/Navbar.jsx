@@ -1,12 +1,19 @@
 ﻿import React, { useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/freshcart-logo.svg';
 import { AuthContext } from '../../Context/AuthContext';
 
 export default function Navbar() {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
-  const { token } = useContext(AuthContext)
+  const { token, setToken } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  function logOut() {
+    localStorage.removeItem('token');
+    setToken(null);
+    navigate('/login');
+  }
 
   return (
     <nav>
@@ -35,9 +42,9 @@ export default function Navbar() {
         <a href="https://linkedIn.com" target="_blank" rel="noopener noreferrer" className="navbar-social-icon" aria-label="LinkedIn">
           <i className='fa-brands fa-linkedin-in'></i>
         </a>
-        {token ? <Link className={`navbar-link navbar-social-icon`} aria-label="logout">
+        {token ? <span onClick={logOut} className={`navbar-link navbar-social-icon hover:cursor-pointer`} aria-label="logout">
           Logout
-        </Link> : <Link to="/login" className={`navbar-link${isActive('/login') ? ' active' : ''} navbar-social-icon`} aria-label="Login">
+        </span> : <Link to="/login" className={`navbar-link${isActive('/login') ? ' active' : ''} navbar-social-icon`} aria-label="Login">
           Login
         </Link>}
       </div>
