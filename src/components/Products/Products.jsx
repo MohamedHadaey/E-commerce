@@ -36,10 +36,19 @@ export default function Products() {
               </div>
               <div className="product-info">
                 <h6 className='product-category'>{product.category.name}</h6>
-                <h3 className="product-title">{product.title}</h3>
+                <h3 className="product-title">{product.title.split(' ').slice(0,3).join(' ')}</h3>
                 <div className='flex justify-between items-center '>
                   <div className="price">
-                    <p>{product.price} EGP</p>
+                    <p>
+                      <span className={product.priceAfterDiscount ? 'line-through text-red-600' : ''}>
+                        {product.price}
+                      </span>
+                      {
+                        product.priceAfterDiscount && (<span>
+                          {product.priceAfterDiscount}
+                        </span>)
+                      }
+                      EGP</p>
                   </div>
                   <div className="rate">
                     <span>
