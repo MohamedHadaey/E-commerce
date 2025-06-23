@@ -8,6 +8,7 @@ import Notfound from './components/Notfound/Notfound';
 import Products from './Components/Products/Products';
 import Categories from './Components/Categories/Categories';
 import AuthContextProvider from './Context/AuthContext';
+import ProtectedRoute from './components/Protected/ProtectedRoute';
 
 function App() {
   const router = createBrowserRouter([
@@ -20,10 +21,14 @@ function App() {
           path: 'home', element: <Home />
         },
         {
-          path: 'products', element: <Products />
+          path: 'products', element: <ProtectedRoute>
+            <Products />
+          </ProtectedRoute>
         },
         {
-          path: 'categories', element: <Categories />
+          path: 'categories', element: <ProtectedRoute>
+            <Categories />
+          </ProtectedRoute>
         },
         {
           path: 'login', element: <Login />
