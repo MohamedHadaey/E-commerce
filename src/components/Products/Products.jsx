@@ -16,7 +16,7 @@ export default function Products() {
   }, [])
 
   return <>
-    <div id="products">
+    <div id="products" className='container mx-auto'>
       <div className="title text-center mt-5 mb-10">
         <h1 className='text-3xl font-bold text-gray-500'>Products</h1>
       </div>

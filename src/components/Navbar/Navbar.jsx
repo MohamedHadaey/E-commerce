@@ -16,7 +16,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav>
+    <nav className='fixed top-0 left-0 right-0 z-50'>
       {/* Left side: Logo, Site Name, and Navigation Links */}
       <div className="navbar-left">
         <Link to="/">

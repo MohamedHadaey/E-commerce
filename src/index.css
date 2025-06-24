@@ -396,3 +396,40 @@ form button:focus {
 .product .product-info .rate i {
   color: #f59e0b;
 }
+/* Styles of home slider */
+.sliders-section {
+  width: 100%;
+   height: 75vh;
+}
+
+.sliders-section .fixed-images {
+  height: 75vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-bottom: 3px;
+}
+
+.sliders-section .fixed-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-container {
+  width: 100%;
+  height: 100%;
+}
+
+.slider-container .slick-slide .slider {
+  height: 75vh !important;
+}
+
+.slider-container .slick-slide .slider img {
+  height: 75vh !important;
+}
+
+.slider-container .slick-slide .slider img:hover {
+  cursor: grab;
+}
