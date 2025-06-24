@@ -1,6 +1,4 @@
 ﻿import React from 'react';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import sliderImage1 from '../../assets/images/slider-image-1.jpeg';
 import sliderImage2 from '../../assets/images/slider-image-2.jpeg';
@@ -24,17 +22,17 @@ function HomeSliders() {
             <Slider {...settings}>
                 <div>
                     <div className="slider">
-                        <img src={sliderImage1} alt="slider image" className='w-full h-full' />
+                        <img src={sliderImage1} alt="slider image" className='w-full h-full' loading="lazy" />
                     </div>
                 </div>
                 <div>
                     <div className="slider">
-                        <img src={sliderImage2} alt="slider image" className='w-full h-full' />
+                        <img src={sliderImage2} alt="slider image" className='w-full h-full' loading="lazy" />
                     </div>
                 </div>
                 <div>
                     <div className="slider">
-                        <img src={sliderImage3} alt="slider image" className='w-full h-full' />
+                        <img src={sliderImage3} alt="slider image" className='w-full h-full' loading="lazy" />
                     </div>
                 </div>
 

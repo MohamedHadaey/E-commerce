@@ -389,17 +389,18 @@ form button:focus {
   margin: 8px 0;
 }
 
-.product .product-info .price p span{
+.product .product-info .price p span {
   margin-right: 5px;
 }
 
 .product .product-info .rate i {
   color: #f59e0b;
 }
+
 /* Styles of home slider */
 .sliders-section {
   width: 100%;
-   height: 75vh;
+  height: 75vh;
 }
 
 .sliders-section .fixed-images {
@@ -408,7 +409,7 @@ form button:focus {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  padding-bottom: 3px;
+  margin-top: -6px;
 }
 
 .sliders-section .fixed-images img {
@@ -432,4 +433,27 @@ form button:focus {
 
 .slider-container .slick-slide .slider img:hover {
   cursor: grab;
+}
+
+.categories-sliders-section .slider-container .category-slider img{
+  margin-bottom: 10px;
+  width: 100%;
+  height: 200px;
+}
+
+.categories-sliders-section .slider-container .category-slider img:hover {
+  cursor: grab;
+}
+
+.slick-arrow::before {
+  color: #16a34a;
+  font-size: 30px;
+}
+
+.slick-next {
+    right: -40px;
+}
+
+.slick-prev {
+    left: -40px;
 }
