@@ -1,0 +1,61 @@
+﻿#categories-section .container .static-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+#categories-section .container .static-card2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 100%;
+    padding: 30px;
+}
+
+#categories-section .container .static-card h3 {
+    color: #22c55e;
+    font-weight: bolder;
+    line-height: 1.2;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+#categories-section .container .static-card p {
+    color: rgba(33, 37, 41, 0.5);
+    font-size: 22px;
+    font-weight: 200;
+    max-width: 85%;
+}
+
+.category-item {
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease-in-out;
+    margin: 10px;
+}
+
+.category-item:hover {
+    transform: scale(1.03);
+}
+
+.category-item img {
+    height: 300px;
+}
+
+.category-item span {
+    padding: 15px 10px;
+    color: #22c55e;
+    font-size: 16px;
+    font-weight: 600;
+}

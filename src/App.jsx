@@ -10,6 +10,7 @@ import Categories from './Components/Categories/Categories';
 import AuthContextProvider from './Context/AuthContext';
 import ProtectedRoute from './components/Protected/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import Brands from './components/Brands/Brands';
 
 function App() {
   const router = createBrowserRouter([
@@ -29,6 +30,11 @@ function App() {
         {
           path: 'categories', element: <ProtectedRoute>
             <Categories />
+          </ProtectedRoute>
+        },
+        {
+          path: 'brands', element: <ProtectedRoute>
+            <Brands />
           </ProtectedRoute>
         },
         {
