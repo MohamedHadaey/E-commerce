@@ -9,6 +9,7 @@ import Products from './Components/Products/Products';
 import Categories from './Components/Categories/Categories';
 import AuthContextProvider from './Context/AuthContext';
 import ProtectedRoute from './components/Protected/ProtectedRoute';
+import { QueryClient } from 'react-query';
 
 function App() {
   const router = createBrowserRouter([
@@ -41,12 +42,16 @@ function App() {
         }
       ]
     }
-  ])
+  ]);
+
+  const ReactQueryConfig = new QueryClient();
 
   return (
     <>
       <AuthContextProvider>
-        <RouterProvider router={router} />
+        <QueryClientProvider client={ ReactQueryConfig }>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </AuthContextProvider>
     </>
   )
