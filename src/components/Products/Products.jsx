@@ -8,9 +8,19 @@ export default function Products() {
     return axios.get('https://ecommerce.routemisr.com/api/v1/products');
   }
 
-  const { data, isError, isLoading, error } = useQuery({
+  const { data, isError, isLoading, error, refetch } = useQuery({
     queryKey: ['allProducts'],
     queryFn: getAllProducts,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    // enabled: false,
+    // refetchInterval: 3000,
+    // retry: 3,
+    // retryDelay: 3000,
+    // cacheTime: 5000,
+    // refetchOnFocusWindow: true,
+    // staleTime: 5000,
+    // placeholderData: () => { }
   })
 
   if (isLoading) {
@@ -84,6 +94,13 @@ export default function Products() {
             )
           })}
         </div>
+      </div>
+    </>
+  } else {
+    return <>
+      {/* this logic of button for loading more products just for testing purpose  */}
+      <div className='w-full  flex justify-center items-center '>
+        <button type='button' className='btn px-3 py-2 cursor-pointer rounded-l font-bold text-center bg-emerald-600 text-amber-50 w-50 mx-auto hover:bg-emerald-700 hover:text-amber-50 hover:border-amber-600' onClick={refetch}>Load More Products</button>
       </div>
     </>
   }
