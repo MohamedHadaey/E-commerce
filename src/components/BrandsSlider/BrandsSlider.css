@@ -1,0 +1,20 @@
+﻿.brands-slider .brand-item {
+    padding: 20px;
+    margin: 20px;
+}
+
+.brands-slider .brand-item:focus-visible {
+    outline: 0 !important;
+}
+
+.brands-slider .brand-item img {
+    border-radius: 10px;
+    box-shadow: rgba(145, 158, 171, .2) 0px 2px 4px -1px, rgba(145, 158, 171, .14) 0px 4px 5px 0px, rgba(145, 158, 171, .12) 0px 1px 10px 0px;
+    cursor: grab;
+    transition: all 0.3s ease;
+}
+
+.brands-slider .brand-item img:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}

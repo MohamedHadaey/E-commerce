@@ -4,11 +4,12 @@ import fixedSliderImage1 from '../../assets/images/grocery-banner.png';
 import fixedSliderImage2 from '../../assets/images/grocery-banner-2.jpeg';
 import fixedSliderImage3 from '../../assets/images/slider-2.jpeg';
 import CategoriesSliders from '../CategoriesSliders/CategoriesSliders';
+import BrandsSlider from '../BrandsSlider/BrandsSlider';
 
 export default function Home() {
   return <>
 
-    <div id="home" className='w-full'>
+    <div id="home" className='container mx-auto'>
       <div className="sliders-section flex justify-center items-center">
         <div className='w-[80%]'>
           <HomeSliders />
@@ -22,10 +23,17 @@ export default function Home() {
         </div>
       </div>
       <div className="categories-sliders-section flex justify-start items-start gap-6 flex-col py-15">
-        <h2 className='text-2xl font-medium text-center mb-5'>Shop popular categories</h2>
+        <h2 className='text-2xl font-medium text-center mb-5'>Shop popular categories</h2> 
+        <span>
+          See all categories
+        </span>
         <div className="container mx-auto">
           <CategoriesSliders />
         </div>
+      </div>
+
+      <div className="brands py-10">
+        <BrandsSlider />
       </div>
     </div>
   </>
