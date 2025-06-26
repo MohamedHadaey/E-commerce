@@ -25,9 +25,9 @@
 
 #categories-section .container .static-card p {
     color: rgba(33, 37, 41, 0.5);
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 200;
-    max-width: 85%;
+    max-width: 90%;
 }
 
 .category-item {

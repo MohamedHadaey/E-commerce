@@ -16,6 +16,10 @@ body {
  box-sizing: border-box;
 }
 
+.text-success {
+  color: #22c55e;
+}
+
 /* Navbar Styles */
 nav {
   display: flex;
@@ -398,6 +402,7 @@ form button:focus {
 
 .product .product-image img {
   transition: all 0.3s ease;
+  max-height: 350px;
 }
 
 .product .product-image img:hover {
@@ -491,4 +496,36 @@ form button:focus {
 
 .slick-prev {
   left: -40px;
+}
+
+.static-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.static-card2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 100%;
+    padding: 30px;
+}
+
+.static-card h3 {
+    color: #22c55e;
+    font-weight: bolder;
+    line-height: 1.2;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.static-card p {
+    color: rgba(33, 37, 41, 0.5);
+    font-size: 20px;
+    font-weight: 200;
+    max-width: 85%;
 }

@@ -24,7 +24,7 @@ export default function Brands() {
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-5 p-5">
             <div className="static-card">
               <h3>Our Brands</h3>
-              <p>You can see our categories and each category has its own page.</p>
+              <p> Discover our featured brands, Click on any brand to view its dedicated page and explore their products!</p>
             </div>
           </div>
           <div className="static-card2">
@@ -50,7 +50,7 @@ export default function Brands() {
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-5 p-5">
             <div className="static-card">
               <h3>Our Brands</h3>
-              <p>You can see our brands and each brand has its own page.</p>
+              <p> Discover our featured brands, Click on any brand to view its dedicated page and explore their products!</p>
             </div>
             {data.data.data.map((category) => {
               return <div className="category-item" key={category.id}>
