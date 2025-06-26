@@ -11,6 +11,7 @@ import AuthContextProvider from './Context/AuthContext';
 import ProtectedRoute from './components/Protected/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Brands from './components/Brands/Brands';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
 function App() {
   const router = createBrowserRouter([
@@ -25,6 +26,11 @@ function App() {
         {
           path: 'products', element: <ProtectedRoute>
             <Products />
+          </ProtectedRoute>
+        },
+        {
+          path: 'product-details/:id', element: <ProtectedRoute>
+            <ProductDetails />
           </ProtectedRoute>
         },
         {

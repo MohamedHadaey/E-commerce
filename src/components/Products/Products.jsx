@@ -2,6 +2,7 @@
 import React from 'react'
 import { FallingLines } from 'react-loader-spinner';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
 export default function Products() {
   function getAllProducts() {
@@ -26,12 +27,12 @@ export default function Products() {
   if (isLoading) {
     return <>
       <div id="products" className='container mx-auto'>
-          <div className="static-card">
-            <h3>Our Products</h3>
-            <p>
-              Browse our diverse collection. Click on any product to view its details and discover more!
-            </p>
-          </div>
+        <div className="static-card">
+          <h3>Our Products</h3>
+          <p>
+            Browse our diverse collection. Click on any product to view its details and discover more!
+          </p>
+        </div>
         <div className="spinner flex justify-center items-center w-full my-30">
           <FallingLines
             color="#4fa94d"
@@ -74,9 +75,11 @@ export default function Products() {
           {data.data.data.map((product) => {
             return (
               <div className="product" key={product._id}>
-                <div className="product-image">
-                  <img src={product.imageCover} alt={product.title} className='w-full ' />
-                </div>
+                <Link to={`/product-details/${product._id}`} >
+                  <div className="product-image">
+                    <img src={product.imageCover} alt={product.title} className='w-full ' />
+                  </div>
+                </Link>
                 <div className="product-info">
                   <h6 className='product-category'>{product.category.name}</h6>
                   <h3 className="product-title">{product.title.split(' ').slice(0, 3).join(' ')}</h3>
