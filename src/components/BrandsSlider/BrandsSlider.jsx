@@ -1,9 +1,8 @@
 ﻿import React from "react";
 import Slider from "react-slick";
-import { useQuery } from "react-query";
-import axios from "axios";
 import "./BrandsSlider.css";
 import { ThreeCircles } from "react-loader-spinner";
+import useAllBrands from "../../CustomHooks/useAllBrands";
 
 function BrandsSlider() {
     const settings = {
@@ -43,20 +42,9 @@ function BrandsSlider() {
         ]
     };
 
-    function getAllBrands() {
-        return axios.get('https://ecommerce.routemisr.com/api/v1/brands')
-    }
+    const sharedBrands = useAllBrands();
 
-
-    const { data, isLoading } = useQuery({
-        queryKey: ['allBrands'],
-        queryFn: getAllBrands,
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        refetchOnReconnect: false,
-    })
-
-    if (isLoading) {
+    if (sharedBrands.isLoading) {
         return <>
             <div className="spinner-sec flex justify-center items-center w-full p-5 my-5">
                 <ThreeCircles
@@ -72,11 +60,11 @@ function BrandsSlider() {
         </>
     }
 
-    if (data) {
+    if (sharedBrands.data) {
         return <>
             <div className="slider-container brands-slider">
                 <Slider {...settings}>
-                    {data.data.data.map((brand) => {
+                    {sharedBrands.data.data.data.map((brand) => {
                         return <div className="brand-item" key={brand._id}>
                             <img src={brand.image} alt={brand.name} loading="lazy" />
                         </div>

@@ -1,23 +1,12 @@
 ﻿import React from 'react'
 import '../Categories/Categories.css'
-import axios from 'axios';
-import { useQuery } from 'react-query';
 import { ThreeCircles } from 'react-loader-spinner';
+import useAllBrands from '../../CustomHooks/useAllBrands';
 
 export default function Brands() {
+  const sharedBrands = useAllBrands();
 
-  function getAllBrands() {
-    return axios.get('https://ecommerce.routemisr.com/api/v1/brands')
-  };
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['allBrands'],
-    queryFn: getAllBrands,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
-
-  if (isLoading) {
+  if (sharedBrands.isLoading) {
     return <>
       <div id="categories-section">
         <div className="container mx-auto py-10">
@@ -43,7 +32,7 @@ export default function Brands() {
     </>
   }
 
-  if (data) {
+  if (sharedBrands.data) {
     return <>
       <div id="categories-section">
         <div className="container mx-auto py-10">
@@ -52,7 +41,7 @@ export default function Brands() {
               <h3>Our Brands</h3>
               <p> Discover our featured brands, Click on any brand to view its dedicated page and explore their products!</p>
             </div>
-            {data.data.data.map((category) => {
+            {sharedBrands.data.data.data.map((category) => {
               return <div className="category-item" key={category.id}>
                 <img src={category.image} className="w-full shadow-lg" alt={category.name} />
                 <span>{category.name}</span>

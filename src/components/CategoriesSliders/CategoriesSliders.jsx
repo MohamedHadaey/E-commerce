@@ -1,7 +1,6 @@
-﻿import axios from "axios";
-import React from "react";
-import { useQuery } from "react-query";
+﻿import React from "react";
 import Slider from "react-slick";
+import useAllCategories from "../../CustomHooks/useAllCategories";
 
 function CategoriesSliders() {
     const settings = {
@@ -24,34 +23,25 @@ function CategoriesSliders() {
         waitForAnimate: false,
     };
 
-    function getAllCategories() {
-        return axios.get('https://ecommerce.routemisr.com/api/v1/categories')
-    }
+    const sharedCategories = useAllCategories();
 
-    const { data, isLoading, isError, error } = new useQuery({
-        queryKey: ['allCategories'],
-        queryFn: getAllCategories,
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-    });
-
-    if (isLoading) {
+    if (sharedCategories.isLoading) {
         return <>
             <p>Loading...</p>
         </>
     }
 
-    if (isError) {
+    if (sharedCategories.isError) {
         return <>
-            <p>{error.error.message}</p>
+            <p>{sharedCategories.error.error.message}</p>
         </>
     }
 
-    if (data) {
+    if (sharedCategories.data) {
         return <>
             <div className="slider-container">
                 <Slider {...settings}>
-                    {data.data.data.slice(0, 8).map((category) => {
+                    {sharedCategories.data.data.data.slice(0, 8).map((category) => {
                         return (
                             <div className="category-slider" key={category._id}>
                                 <img src={category.image} alt={category.name} className="w-full" loading="lazy" />
