@@ -7,6 +7,7 @@ import CategoriesSliders from '../CategoriesSliders/CategoriesSliders';
 import BrandsSlider from '../BrandsSlider/BrandsSlider';
 import { useNavigate, Link } from 'react-router-dom';
 import useAllProducts from '../../CustomHooks/useAllProducts';
+import { FallingLines } from 'react-loader-spinner';
 
 export default function Home() {
   const navigate = useNavigate(); // Add this line
