@@ -1,9 +1,10 @@
 ﻿import axios from 'axios';
 import { Formik, useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { ColorRing } from 'react-loader-spinner';
+import { AuthContext } from '../../Context/AuthContext';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,11 +15,10 @@ export default function Login() {
     email: '',
     password: '',
   };
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  const { setToken } = useContext(AuthContext);
   // using .then, .catch to send data to backend
   async function loginUser(values) {
-    console.log('register form values', values);
     setSubmitted(true);
     axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", values)
       .then((res) => {
@@ -27,8 +27,10 @@ export default function Login() {
         // here how to route to login page after 3 seconds
         setTimeout(() => {
           setSuccess(false);
-          navigate('/home')
-        }, 3000);
+          navigate('/home');
+          localStorage.setItem('token', res.data.token)
+          setToken(res.data.token);
+        }, 1000);
         console.log('res', res)
       })
       .catch((error) => {
@@ -75,8 +77,8 @@ export default function Login() {
         </div> : ''}
         <div className="mb-5">
           <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
-          <input type="email" id="email" value={loginForm.values.email} onChange={loginForm.handleChange} onBlur={loginForm.handleBlur} className="shadow-xs bg-gray-100 border border-gray-100 text-gray-900 text-sm rounded-lg   block w-full p-2.5  dark:border-gray-400 dark:placeholder-gray-400" placeholder="name@flowbite.com" required />
-          {(loginForm.errors.email && (loginForm.submitCount > 0 || (loginForm.values.email && loginForm.touched.email))) && (<div className="p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+          <input type="email" id="email" name="email" value={loginForm.values.email} onChange={loginForm.handleChange} onBlur={loginForm.handleBlur} className="shadow-xs bg-gray-100 border border-gray-100 text-gray-900 text-sm rounded-lg   block w-full p-2.5  dark:border-gray-400 dark:placeholder-gray-400" placeholder="name@flowbite.com" required />
+          {(loginForm.errors.email && (loginForm.submitCount > 0 || (loginForm.values.email && loginForm.touched.email))) && (<div className="p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert" >
             {loginForm.errors.email}
           </div>)}
         </div>
@@ -89,7 +91,7 @@ export default function Login() {
             onChange={loginForm.handleChange}
             onBlur={loginForm.handleBlur}
             placeholder='*****************'
-            className="shadow-xs bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 pr-10 dark:border-gray-400 dark:placeholder-gray-400"
+            className="shadow-xs bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 pr-10 dark:border-gray-400 dark:placeholder-gray-400" autoComplete="off"
             required
           />
           <span

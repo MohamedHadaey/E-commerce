@@ -1,0 +1,141 @@
+﻿.item {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.item:focus-visible {
+    outline: 0 !important;
+}
+
+.grid {
+    border-radius: 10px;
+}
+
+#product-details .container .product-details-image {
+    border-radius: 10px;
+}
+
+#product-details .container .product-details-image img {
+    border-radius: 10px;
+    cursor: grab;
+    transition: all 0.3s;
+}
+
+
+.product-details-info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+    height: 100%;
+    padding: 30px 20px;
+}
+
+.product-details-info h2 {
+    font-size: 30px;
+    color: #333;
+    font-weight: 200;
+    line-height: 1.2;
+}
+
+.product-details-info p {
+    font-size: 16px;
+    color: #888;
+}
+
+.product-details-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-details-info ul li {
+    margin-bottom: 8px;
+}
+
+.product-details-info ul li strong {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+    min-width: 100px;
+    display: inline-block;
+}
+
+.product-details-info ul li span {
+    font-weight: 400;
+    color: #888;
+    font-size: 16px
+}
+
+.product-details-info ul li.brands span{
+    background-color: #eee;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: #333;
+    font-weight: 600;
+    margin-right: 5px
+}
+
+.product-details-info .price p span {
+    margin-right: 5px;
+}
+
+.product-details-info .rate i {
+    color: #f59e0b;
+}
+
+.product-details-actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+.product-details-actions button {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    box-shadow: 0 10px 16px 0 transparent;
+    transition: all 0.3s;
+}
+
+.product-details-actions button:hover {
+    cursor: pointer;
+}
+
+.product-details-actions button:first-of-type {
+    background-color: #22c55e;
+    flex-grow: 1;
+    gap: 10px;
+}
+
+.product-details-actions button:first-of-type:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 16px 0 rgba(34, 197, 94, 0.15);
+}
+
+.product-details-actions button:first-of-type span {
+    font-weight: 600;
+}
+
+.product-details-actions button:last-of-type {
+    background-color: #eee;
+    flex-grow: 1;
+    width: 50px;
+    height: 50px;
+}
+
+.product-details-actions button:last-of-type:hover {
+    box-shadow: 0 10px 16px 0 hwb(150 55% 44% / 0.15);
+}
+
+.product-details-actions button:last-of-type span {
+    font-weight: 600;
+    font-size: 20px;
+}

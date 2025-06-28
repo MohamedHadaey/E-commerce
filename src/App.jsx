@@ -7,6 +7,11 @@ import Register from './Components/Register/Register';
 import Notfound from './components/Notfound/Notfound';
 import Products from './Components/Products/Products';
 import Categories from './Components/Categories/Categories';
+import AuthContextProvider from './Context/AuthContext';
+import ProtectedRoute from './components/Protected/ProtectedRoute';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import Brands from './components/Brands/Brands';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
 function App() {
   const router = createBrowserRouter([
@@ -19,10 +24,24 @@ function App() {
           path: 'home', element: <Home />
         },
         {
-          path: 'products', element: <Products />
+          path: 'products', element: <ProtectedRoute>
+            <Products />
+          </ProtectedRoute>
         },
         {
-          path: 'categories', element: <Categories />
+          path: 'product-details/:id', element: <ProtectedRoute>
+            <ProductDetails />
+          </ProtectedRoute>
+        },
+        {
+          path: 'categories', element: <ProtectedRoute>
+            <Categories />
+          </ProtectedRoute>
+        },
+        {
+          path: 'brands', element: <ProtectedRoute>
+            <Brands />
+          </ProtectedRoute>
         },
         {
           path: 'login', element: <Login />
@@ -35,11 +54,17 @@ function App() {
         }
       ]
     }
-  ])
+  ]);
+
+  const ReactQueryConfig = new QueryClient();
 
   return (
     <>
-    <RouterProvider router={router} />
+      <AuthContextProvider>
+        <QueryClientProvider client={ ReactQueryConfig }>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </AuthContextProvider>
     </>
   )
 }

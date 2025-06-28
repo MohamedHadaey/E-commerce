@@ -15,7 +15,7 @@ export default function Footer() {
               <h3 className=" mb-2">Get the FreshCart app</h3>
               <p className="text-sm text-gray-500 mb-3">We will send you a link, open it on your phone to download the app.</p>
               <form className="flex gap-2 w-full max-w-md">
-                <input type="email" name="email" id="email" placeholder="Email ..." className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-green-600" />
+                <input type="email" name="email" id="visitor-email" placeholder="Email ..." className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-green-600" />
                 <button type="button" className="main-btn bg-green-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-green-700 transition">Share App Link</button>
               </form>
             </div>

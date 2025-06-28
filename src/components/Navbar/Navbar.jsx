@@ -1,13 +1,22 @@
-﻿import React from 'react'
-import { Link, useLocation } from 'react-router-dom';
+﻿import React, { useContext } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/freshcart-logo.svg';
+import { AuthContext } from '../../Context/AuthContext';
 
 export default function Navbar() {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+  const { token, setToken } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  function logOut() {
+    localStorage.removeItem('token');
+    setToken(null);
+    navigate('/login');
+  }
 
   return (
-    <nav>
+    <nav className='fixed top-0 left-0 right-0 z-50'>
       {/* Left side: Logo, Site Name, and Navigation Links */}
       <div className="navbar-left">
         <Link to="/">
@@ -17,6 +26,7 @@ export default function Navbar() {
           <Link to="/home" className={`navbar-link${isActive('/home') ? ' active' : ''}`}>Home</Link>
           <Link to="/products" className={`navbar-link${isActive('/products') ? ' active' : ''}`}>Products</Link>
           <Link to="/categories" className={`navbar-link${isActive('/categories') ? ' active' : ''}`}>Categories</Link>
+          <Link to="/brands" className={`navbar-link${isActive('/brands') ? ' active' : ''}`}>Brands</Link>
         </div>
       </div>
       {/* Right side: Social Icons */}
@@ -33,9 +43,11 @@ export default function Navbar() {
         <a href="https://linkedIn.com" target="_blank" rel="noopener noreferrer" className="navbar-social-icon" aria-label="LinkedIn">
           <i className='fa-brands fa-linkedin-in'></i>
         </a>
-        <Link to="/login" className={`navbar-link${isActive('/login') ? ' active' : ''} navbar-social-icon`} aria-label="Login">
+        {token ? <span onClick={logOut} className={`navbar-link navbar-social-icon hover:cursor-pointer`} aria-label="logout">
+          Logout
+        </span> : <Link to="/login" className={`navbar-link${isActive('/login') ? ' active' : ''} navbar-social-icon`} aria-label="Login">
           Login
-        </Link>
+        </Link>}
       </div>
     </nav>
   );

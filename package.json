@@ -19,7 +19,10 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-loader-spinner": "^6.1.6",
+    "react-query": "^3.39.3",
     "react-router-dom": "^7.6.2",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1",
     "tailwindcss": "^4.1.8",
     "yup": "^1.6.1"
   },
