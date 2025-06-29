@@ -77,6 +77,16 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+                  <div className="product-button">
+                    <Link to={`/cart`} >
+                      <button className='btn mx-auto text-center main-btn' type='button'>
+                        <span>
+                          <i className='fa-solid fa-cart-shopping'></i>
+                        </span>
+                        <span>Add to Cart</span>
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               )
             })}

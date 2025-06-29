@@ -433,6 +433,34 @@ form button:focus {
   color: #f59e0b;
 }
 
+.product .product-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 50px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.product .product-button button {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  transform: translateX(50%);
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+ 
+}
+
+.product:hover .product-button button{
+  bottom: 0;
+}
+
 /* Styles of home slider */
 .sliders-section {
   width: 100%;
