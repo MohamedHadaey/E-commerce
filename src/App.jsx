@@ -14,6 +14,7 @@ import ProductDetails from './components/ProductDetails/ProductDetails';
 import Cart from './components/Cart/Cart';
 import Products from './components/Products/Products';
 import CartContextProvider from './Context/CartContext';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const router = createBrowserRouter([
@@ -71,6 +72,7 @@ function App() {
         <QueryClientProvider client={ReactQueryConfig}>
           <CartContextProvider>
             <RouterProvider router={router} />
+            <Toaster />
           </CartContextProvider>
         </QueryClientProvider>
       </AuthContextProvider>

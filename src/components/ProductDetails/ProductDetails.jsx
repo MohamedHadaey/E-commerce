@@ -1,10 +1,11 @@
-﻿import React from 'react';
+﻿import React, { useContext } from 'react';
 import Slider from 'react-slick/lib/slider';
 import './ProductDetails.css';
 import { ThreeCircles } from 'react-loader-spinner';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { CartContext } from '../../Context/CartContext';
 
 export default function ProductDetails() {
     const settings = {
@@ -16,6 +17,12 @@ export default function ProductDetails() {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1
+    };
+
+    const { addProductToCart } = useContext(CartContext);
+
+    async function handleAddProductToCart(id) {
+        await addProductToCart(id);
     };
 
     const { id } = useParams();
@@ -96,7 +103,7 @@ export default function ProductDetails() {
                                 </div>
                             </div>
                             <div className="product-details-actions">
-                                <button className='btn btn-primary w-full text-white text-center' type='button'>
+                                <button className='btn btn-primary w-full text-white text-center' type='button' onClick={() => handleAddProductToCart(id)}>
                                     <span>
                                         <i className='fa-solid fa-cart-shopping'></i>
                                     </span>

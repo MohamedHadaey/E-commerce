@@ -1,10 +1,16 @@
-﻿import React from 'react'
+﻿import React, { useContext } from 'react'
 import { FallingLines } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import useAllProducts from '../../CustomHooks/useAllProducts';
+import { CartContext } from '../../Context/CartContext';
 
 export default function Products() {
   const sharedProducts = useAllProducts();
+
+  const { addProductToCart } = useContext(CartContext);
+  async function handleAddProductToCart(id) {
+    await addProductToCart(id);
+  };
 
   if (sharedProducts.isLoading) {
     return <>
@@ -86,14 +92,12 @@ export default function Products() {
                   </div>
                 </div>
                 <div className="product-button">
-                  <Link to={`/cart`} >
-                  <button className='btn mx-auto text-center main-btn' type='button'>
+                  <button onClick={() => handleAddProductToCart(product._id)} className='btn mx-auto text-center main-btn' type='button'>
                     <span>
                       <i className='fa-solid fa-cart-shopping'></i>
                     </span>
                     <span>Add to Cart</span>
                   </button>
-                  </Link>
                 </div>
               </div>
             )
