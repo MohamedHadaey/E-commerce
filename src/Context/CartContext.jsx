@@ -6,9 +6,6 @@ export const CartContext = createContext({})
 
 export default function CartContextProvider({ children }) {
     const { token } = useContext(AuthContext);
-
-
-
     const [numOfCartItems, setNumOfCartItems] = useState(0);
     const [products, setProducts] = useState(null);
     const [totalCartPrice, setTotalCartPrice] = useState(0);
@@ -16,7 +13,6 @@ export default function CartContextProvider({ children }) {
         const data = {
             "productId": productId
         }
-        console.log('token 1', token)
         return axios.post('https://ecommerce.routemisr.com/api/v1/cart', data, {
             headers: {
                 token: token
@@ -35,14 +31,13 @@ export default function CartContextProvider({ children }) {
 
     function getUserCart() {
         let headers = {
-            token: token
+            token: localStorage.getItem('token')
         }
         axios.get('https://ecommerce.routemisr.com/api/v1/cart', { headers }).then((response) => {
-            console.log('response.data getUserCart', response.data);
+            console.log('response.data getUserCart', response);
             setNumOfCartItems(response.data.numOfCartItems);
-            setProducts(response.data.products);
-            setTotalCartPrice(response.data.totalCartPrice);
-            toast.success(response.data.message);
+            setProducts(response.data.data.products);
+            setTotalCartPrice(response.data.data.totalCartPrice);
         }).catch((error) => {
             console.log('ERROR.data getUserCart', error);
         })
