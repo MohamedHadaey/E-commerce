@@ -5,12 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { ColorRing } from 'react-loader-spinner';
 import { AuthContext } from '../../Context/AuthContext';
+import { CartContext } from '../../Context/CartContext';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isSuccess, setSuccess] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
+  const { getUserCart } = useContext(CartContext)
   const user = {
     email: '',
     password: '',
@@ -31,6 +33,9 @@ export default function Login() {
           localStorage.setItem('token', res.data.token)
           setToken(res.data.token);
         }, 1000);
+        setTimeout(() => {
+         getUserCart();
+        }, 3000);
         console.log('res', res)
       })
       .catch((error) => {

@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { useContext } from 'react'
 import HomeSliders from '../HomeSliders/HomeSliders';
 import fixedSliderImage1 from '../../assets/images/grocery-banner.png';
 import fixedSliderImage2 from '../../assets/images/grocery-banner-2.jpeg';
@@ -8,10 +8,17 @@ import BrandsSlider from '../BrandsSlider/BrandsSlider';
 import { useNavigate, Link } from 'react-router-dom';
 import useAllProducts from '../../CustomHooks/useAllProducts';
 import { FallingLines } from 'react-loader-spinner';
+import { CartContext } from '../../Context/CartContext';
 
 export default function Home() {
   const navigate = useNavigate(); // Add this line
   const sharedProducts = useAllProducts();
+
+    const { addProductToCart } = useContext(CartContext);
+    async function handleAddProductToCart(id) {
+      await addProductToCart(id);
+    };
+
   return <>
     <div id="home" className='container mx-auto'>
       <div className="sliders-section flex justify-center items-center">
@@ -78,14 +85,12 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="product-button">
-                    <Link to={`/cart`} >
-                      <button className='btn mx-auto text-center main-btn' type='button'>
+                      <button onClick={() => handleAddProductToCart(product._id)} className='btn mx-auto text-center main-btn' type='button'>
                         <span>
                           <i className='fa-solid fa-cart-shopping'></i>
                         </span>
                         <span>Add to Cart</span>
                       </button>
-                    </Link>
                   </div>
                 </div>
               )

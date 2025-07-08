@@ -9,10 +9,13 @@ export default function AuthContextProvider({ children }) {
 
     useEffect(() => { 
         const token = localStorage.getItem('token');
+        console.log('tokennnnnn', token)
         if(token !== null) {
             setToken(token);
+            console.log('zzzzzzzzzzzz 2', token)
         } else {
             setToken(null);
+            console.log('yyyyyyyyyyyyyyy 2', token)
         }
     }, [])
 
