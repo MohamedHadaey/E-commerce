@@ -1,8 +1,9 @@
-﻿import React, { useState } from 'react'
+﻿import React, { useContext, useState } from 'react'
 import paymentImage from '../../assets/images/payment-image.png'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { CartContext } from '../../Context/CartContext';
 
 export default function Checkout() {
     const cashOrderObject = {
@@ -10,6 +11,8 @@ export default function Checkout() {
         phone: '',
         city: '',
     };
+    const { cartId } = useContext(CartContext)
+
 
     const [isSuccess, setSuccess] = useState(false);
     const [isSubmitted, setSubmitted] = useState(false);

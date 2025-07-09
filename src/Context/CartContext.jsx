@@ -46,8 +46,7 @@ export default function CartContextProvider({ children }) {
             setNumOfCartItems(response.data.numOfCartItems);
             setProducts(response.data.data.products);
             setTotalCartPrice(response.data.data.totalCartPrice);
-            setCartId(response.data._id);
-            console.log('response.data._id', response.data.data._id)
+            setCartId(response.data.data._id);
         }).catch((error) => {
             console.log('ERROR.data getUserCart', error);
         })
@@ -100,7 +99,7 @@ export default function CartContextProvider({ children }) {
     }
 
     return <>
-        <CartContext.Provider value={{ addProductToCart, numOfCartItems, products, totalCartPrice, getUserCart, updateCount, deleteProduct, clearCart }}>
+        <CartContext.Provider value={{ addProductToCart, numOfCartItems, products, totalCartPrice, getUserCart, updateCount, deleteProduct, clearCart, cartId }}>
             {children}
         </CartContext.Provider>
     </>
