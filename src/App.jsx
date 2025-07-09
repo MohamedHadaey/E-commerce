@@ -15,6 +15,7 @@ import Cart from './components/Cart/Cart';
 import Products from './components/Products/Products';
 import CartContextProvider from './Context/CartContext';
 import { Toaster } from 'react-hot-toast';
+import Checkout from './components/Checkout/Checkout';
 
 function App() {
   const router = createBrowserRouter([
@@ -49,6 +50,11 @@ function App() {
         {
           path: 'cart', element: <ProtectedRoute>
             <Cart />
+          </ProtectedRoute>
+        },
+        {
+          path: 'checkout', element: <ProtectedRoute>
+            <Checkout />
           </ProtectedRoute>
         },
         {

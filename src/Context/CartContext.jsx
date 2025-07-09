@@ -9,6 +9,7 @@ export default function CartContextProvider({ children }) {
     const [numOfCartItems, setNumOfCartItems] = useState(0);
     const [products, setProducts] = useState(null);
     const [totalCartPrice, setTotalCartPrice] = useState(0);
+    const [ cartId, setCartId] = useState(null);
     // This function adds a product to the shopping cart by sending a POST request to the specified API endpoint. 
     // It takes a product ID as an argument, constructs the request data, and includes a token in the headers for authentication. 
     // Upon a successful response, it updates the cart items count, products list, and total cart price, 
@@ -45,6 +46,8 @@ export default function CartContextProvider({ children }) {
             setNumOfCartItems(response.data.numOfCartItems);
             setProducts(response.data.data.products);
             setTotalCartPrice(response.data.data.totalCartPrice);
+            setCartId(response.data._id);
+            console.log('response.data._id', response.data.data._id)
         }).catch((error) => {
             console.log('ERROR.data getUserCart', error);
         })

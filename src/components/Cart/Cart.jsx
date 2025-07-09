@@ -3,6 +3,7 @@ import { CartContext } from '../../Context/CartContext';
 import './Cart.css';
 import emptyCartImg from '../../assets/images/empty-cart-img.svg';
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom';
 
 export default function Cart() {
   // Using useContext to access CartContext which provides cart-related data and functions
@@ -92,9 +93,11 @@ export default function Cart() {
                     <p>
                       <strong>Total Price:</strong> <span>{totalCartPrice} EGP</span>
                     </p>
+                    <Link to="/checkout" >
                     <button type="button" className="main-success-btn w-3/4">
                       CheckOut
                     </button>
+                    </Link>
                     <button disabled={loadingClearCart} type="button" className="main-danger-btn w-3/4" onClick={() => handleClearCart()}>
                       {loadingClearCart == false ? <span>Clear All Products</span> : <span><i className="fa-solid fa-spinner fa-spin"></i></span>}
                     </button>
