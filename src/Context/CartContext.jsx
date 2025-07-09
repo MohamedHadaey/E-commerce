@@ -9,6 +9,10 @@ export default function CartContextProvider({ children }) {
     const [numOfCartItems, setNumOfCartItems] = useState(0);
     const [products, setProducts] = useState(null);
     const [totalCartPrice, setTotalCartPrice] = useState(0);
+    // This function adds a product to the shopping cart by sending a POST request to the specified API endpoint. 
+    // It takes a product ID as an argument, constructs the request data, and includes a token in the headers for authentication. 
+    // Upon a successful response, it updates the cart items count, products list, and total cart price, 
+    // and displays a success message. In case of an error, it shows an error message.
     async function addProductToCart(productId) {
         const data = {
             "productId": productId
@@ -29,6 +33,9 @@ export default function CartContextProvider({ children }) {
         })
     }
 
+    // This function retrieves the user's shopping cart by sending a GET request to the specified API endpoint.
+    // It includes a token in the headers for authentication. Upon a successful response, it updates the cart items count, products list, and total cart price.
+    // In case of an error, it displays an error message.
     function getUserCart() {
         let headers = {
             token: localStorage.getItem('token')
@@ -43,8 +50,25 @@ export default function CartContextProvider({ children }) {
         })
     }
 
+    // This function updates the count of a specific product in the shopping cart by sending a PUT request to the specified API endpoint.
+    // It takes a product ID and the new count as arguments, constructs the request data, and includes a token in the headers for authentication. 
+    // Upon a successful response, it updates the cart items count, products list, and total cart price. In case of an error, it displays an error message.
+    function updateCount(productId, count) {
+        let headers = { token: localStorage.getItem('token') };
+        let countObject = { "count": count };
+        return axios.put(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, countObject, { headers })
+            .then((response) => {
+                setNumOfCartItems(response.data.numOfCartItems);
+                setProducts(response.data.data.products);
+                setTotalCartPrice(response.data.data.totalCartPrice);
+            })
+            .catch((error) => {
+                toast.error(error.response.data.message);
+            });
+    }
+
     return <>
-        <CartContext.Provider value={{ addProductToCart, numOfCartItems, products, totalCartPrice, getUserCart }}>
+        <CartContext.Provider value={{ addProductToCart, numOfCartItems, products, totalCartPrice, getUserCart, updateCount }}>
             {children}
         </CartContext.Provider>
     </>
