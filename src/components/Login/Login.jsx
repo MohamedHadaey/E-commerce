@@ -8,18 +8,46 @@ import { AuthContext } from '../../Context/AuthContext';
 import { CartContext } from '../../Context/CartContext';
 
 export default function Login() {
+  // Using useState to manage local state for showing password, error messages, success messages, and form submission status
+  // The useState hook is used to create state variables and their corresponding setter functions.
   const [showPassword, setShowPassword] = useState(false);
+  // This state variable controls whether the password input is shown as plain text or obscured.
+  // It is toggled by clicking on the eye icon next to the password input field.
   const [errorMessage, setErrorMessage] = useState(null);
+  // This state variable holds any error messages that may occur during form submission, such as invalid credentials.
+  // It is set when an error response is received from the server and cleared after a short delay.
+  // The delay is implemented using setTimeout to allow the user to see the error message for a brief period before it disappears.
+  // This is useful for providing feedback to the user when their login attempt fails.
   const [isSuccess, setSuccess] = useState(false);
+  // This state variable indicates whether the login operation was successful.
+  // It is set to true when the user successfully logs in and false otherwise.
   const [isSubmitted, setSubmitted] = useState(false);
+  // This state variable indicates whether the form is currently being submitted.
+  // It is set to true when the form is submitted and false when the submission is complete.
+  // This is useful for disabling the submit button while the form is being processed to prevent multiple submissions.
   const { getUserCart } = useContext(CartContext)
   const user = {
     email: '',
     password: '',
   };
+  // Using useContext to access the AuthContext which provides authentication-related data and functions
+  // This context is used to manage user authentication state, such as storing the authentication token and user information.
+  // The useContext hook allows you to access the context value provided by the AuthContext.Provider in the parent component.
+  // The AuthContext is typically defined in the parent component and provides the authentication-related data and functions to child components.
   const navigate = useNavigate();
+  // The useNavigate hook is used to programmatically navigate to different routes in the application.
+  // It allows you to change the current route without using a Link component.
+  // It is commonly used when you need to navigate to a different route programmatically, such as after a successful form submission.
+  // The navigate function is called with the desired route path as an argument to navigate to that route.
   const { setToken } = useContext(AuthContext);
   // using .then, .catch to send data to backend
+  // The setToken function is used to update the authentication token in the AuthContext.
+  // This function is typically provided by the AuthContext.Provider in the parent component and allows child components to update the authentication token.
+  // The setToken function is called with the authentication token received from the server to update the token in the AuthContext.
+  // This ensures that the authentication token is available to child components that need it. 
+  
+  // This function handles the login process by sending a POST request to the server with the user's email and password.
+  // It uses axios to make the request and handles the response accordingly.
   async function loginUser(values) {
     setSubmitted(true);
     axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", values)
@@ -48,7 +76,9 @@ export default function Login() {
       })
   }
 
-  // use useFormik htmlFor form handle  
+  // use useFormik htmlFor form handle
+  // The useFormik hook is used to manage form state and handle form submission.
+  // It provides a convenient way to handle form values, validation, and submission.
   const loginForm = useFormik({
     initialValues: user,
     onSubmit: loginUser,
