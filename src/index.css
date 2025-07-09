@@ -12,15 +12,16 @@ body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
- overflow-x: hidden;
- box-sizing: border-box;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .text-success {
   color: #22c55e;
 }
 
-.main-success-btn, .main-danger-btn {
+.main-success-btn,
+.main-danger-btn {
   background-color: transparent;
   font-weight: 600;
   border-radius: 5px;
@@ -32,12 +33,14 @@ body {
   transition: all 0.15s ease-in-out;
 }
 
-.main-success-btn:hover, .main-danger-btn:hover {
+.main-success-btn:hover,
+.main-danger-btn:hover {
   color: #fff;
   cursor: pointer;
 }
 
-.main-success-btn, .main-danger-btn {
+.main-success-btn,
+.main-danger-btn {
   border: 1px solid #198754;
   color: #198754;
 }
@@ -88,6 +91,28 @@ nav .navbar-link {
 
 nav .navbar-link:hover {
   color: #333;
+}
+
+nav .navbar-link.cart-icon {
+  position: relative;
+}
+
+nav .navbar-link.cart-icon .cart-items-number {
+  position: absolute;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -9px;
+  right: -10px;
+  background-color: #dc3545;
+  color: #fff;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  z-index: 1;
+  font-size: 12px;
+  padding: 2px;
 }
 
 .navbar-social {
@@ -489,10 +514,10 @@ form button:focus {
   justify-content: center;
   align-items: center;
   gap: 5px;
- 
+  min-width: 150px;
 }
 
-.product:hover .product-button button{
+.product:hover .product-button button {
   bottom: 0;
 }
 
@@ -532,7 +557,7 @@ form button:focus {
 
 .category-slider:focus-visible {
   outline: 0 !important;
- }
+}
 
 .slider-container .slick-slide .slider img:hover {
   cursor: grab;
@@ -562,33 +587,33 @@ form button:focus {
 }
 
 .static-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 5px;
 }
 
 .static-card2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-    width: 100%;
-    padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+  padding: 30px;
 }
 
 .static-card h3 {
-    color: #22c55e;
-    font-weight: bolder;
-    line-height: 1.2;
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
+  color: #22c55e;
+  font-weight: bolder;
+  line-height: 1.2;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .static-card p {
-    color: rgba(33, 37, 41, 0.5);
-    font-size: 20px;
-    font-weight: 200;
-    max-width: 85%;
+  color: rgba(33, 37, 41, 0.5);
+  font-size: 20px;
+  font-weight: 200;
+  max-width: 85%;
 }

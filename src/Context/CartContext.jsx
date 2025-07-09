@@ -67,8 +67,37 @@ export default function CartContextProvider({ children }) {
             });
     }
 
+    // This function deletes a product from the shopping cart by sending a DELETE request to the specified API endpoint.
+    // It takes a product ID as an argument and includes a token in the headers for authentication
+    async function deleteProduct(productId) {
+        let headers = { token: localStorage.getItem('token') };
+        return axios.delete(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, { headers })
+            .then((response) => {
+                setNumOfCartItems(response.data.numOfCartItems);
+                setProducts(response.data.data.products);
+                setTotalCartPrice(response.data.data.totalCartPrice);
+                return true;
+            }).catch((error) => {
+                toast.error(error.response.data.message);
+                return false;
+            });
+    }
+
+    async function clearCart() {
+        let headers = { token: localStorage.getItem('token') };
+        return axios.delete(`https://ecommerce.routemisr.com/api/v1/cart`, { headers })
+            .then((response) => {
+                setNumOfCartItems(response.data.numOfCartItems);
+                setProducts(response.data.data.products);
+                setTotalCartPrice(response.data.data.totalCartPrice);
+            })
+            .catch((error) => {
+                toast.error(error.response.data.message);
+            });
+    }
+
     return <>
-        <CartContext.Provider value={{ addProductToCart, numOfCartItems, products, totalCartPrice, getUserCart, updateCount }}>
+        <CartContext.Provider value={{ addProductToCart, numOfCartItems, products, totalCartPrice, getUserCart, updateCount, deleteProduct, clearCart }}>
             {children}
         </CartContext.Provider>
     </>

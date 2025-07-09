@@ -2,16 +2,18 @@
 import { CartContext } from '../../Context/CartContext';
 import './Cart.css';
 import emptyCartImg from '../../assets/images/empty-cart-img.svg';
+import toast from 'react-hot-toast'
 
 export default function Cart() {
   // Using useContext to access CartContext which provides cart-related data and functions
   // This includes functions to get the user's cart, number of items in the cart, products in the cart, total cart price, and a function to update the count of products in the cart.
   // The useState hook is used to manage the loading state of product count updates.
-  const { getUserCart, numOfCartItems, products, totalCartPrice, updateCount } = useContext(CartContext);
+  const { getUserCart, numOfCartItems, products, totalCartPrice, updateCount, deleteProduct, clearCart } = useContext(CartContext);
   // State to manage the loading state of product count updates
   // It holds an object with the product ID and the type of update ('inc' for increment, 'dec' for decrement).
   // This is used to show a loading spinner while the count is being updated.
   const [loadingProduct, setLoadingProduct] = useState({ id: null, type: null }); // {id, type: 'inc' | 'dec'}
+  const [loadingClearCart, setLoadingClearCart] = useState(false);
   const username = localStorage.getItem('UserName');
 
   // useEffect hook to call getUserCart when the component mounts
@@ -24,11 +26,39 @@ export default function Cart() {
   // It sets the loading state for the product, calls the updateCount function, and resets the loading state after the operation is complete.
   // It takes productId, newCount, and type ('inc' or 'dec') as arguments.
   async function handleUpdateCount(productId, newCount, type) {
-    setLoadingProduct({ id: productId, type });
+    setLoadingProduct({ id: productId, type: type });
     try {
       await updateCount(productId, newCount);
     } finally {
       setLoadingProduct({ id: null, type: null });
+    }
+  }
+
+  async function handleDeleteProduct(productId) {
+    // This function is intended to handle the deletion of a product from the cart.
+    // It sends a DELETE request to the specified API endpoint to remove the product from the cart.
+    // It includes a token in the headers for authentication.
+    // Upon a successful response, it updates the cart items count, products list, and total cart price.
+    // In case of an error, it displays an error message.
+    setLoadingProduct({ id: productId, type: "delete" });
+    const responseFlag = await deleteProduct(productId);
+    console.log('responseFlag', responseFlag)
+    if (responseFlag) {
+      setLoadingProduct({ id: null, type: null });
+      // If the product deletion is successful, you can perform any additional actions here, like showing a success message or updating the UI.
+      toast.success('Product deleted successfully');
+    } else {
+      setLoadingProduct({ id: null, type: null });
+      console.log('Failed to delete the product');
+    }
+  }
+
+  async function handleClearCart() {
+    setLoadingClearCart(true);
+    try {
+      await clearCart();
+    } finally {
+      setLoadingClearCart(false);
     }
   }
 
@@ -47,12 +77,12 @@ export default function Cart() {
 
           <div className="col-md-12">
             <div className="row flex flex-col md:flex-row">
-              <div className="w-full md:w-2/3 p-8 mb-3">
+              <div className={`p-8 mb-3 ${numOfCartItems === 0 ? 'w-full' : 'w-full md:w-2/3'}`}>
                 <div className="empty-cart-image">
                   <img src={emptyCartImg} alt="Empty Cart" className="img-fluid" />
                 </div>
               </div>
-              <div className="w-full md:w-1/3 p-5 mb-3 flex justify-center items-center">
+              {numOfCartItems > 0 && (<div className="w-full md:w-1/3 p-5 mb-3 flex justify-center items-center">
                 <div className="cart-actions-card">
                   <div className="card">
                     <h4>Orders</h4>
@@ -65,16 +95,16 @@ export default function Cart() {
                     <button type="button" className="main-success-btn w-3/4">
                       CheckOut
                     </button>
-                    <button type="button" className="main-danger-btn w-3/4">
-                      Clear All Products
+                    <button disabled={loadingClearCart} type="button" className="main-danger-btn w-3/4" onClick={() => handleClearCart()}>
+                      {loadingClearCart == false ? <span>Clear All Products</span> : <span><i className="fa-solid fa-spinner fa-spin"></i></span>}
                     </button>
                   </div>
                 </div>
-              </div>
+              </div>)}
             </div>
 
             {/* Products List */}
-            <div className="row">
+            {numOfCartItems > 0 && (<div className="row">
               <div className="w-full p-8 mb-3">
                 <div className="shop-cart">
                   <h3>Shop Cart</h3>
@@ -97,10 +127,15 @@ export default function Cart() {
                               <strong>Price: </strong>
                               <span>{product.price} EGP</span>
                             </div>
-                            <button type="button">
+                            {loadingProduct.id === product.product._id && loadingProduct.type === 'delete' ? (
+                              <button type="button" className='loader-btn'>
+                                <i className="fa-solid fa-spinner fa-spin text-success "></i>
+                              </button>
+                            ) : (<button disabled={loadingProduct.id === product.product._id} type="button" onClick={() => handleDeleteProduct(product.product._id)}>
                               <i className="fa-solid fa-trash-can text-danger"></i>{' '}
                               <span>Remove</span>
-                            </button>
+                            </button>)}
+
                           </div>
 
                           <div className="product-actions flex items-center gap-2">
@@ -137,7 +172,7 @@ export default function Cart() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>)}
           </div>
         </div>
       </div>

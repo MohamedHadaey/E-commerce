@@ -1,4 +1,4 @@
-﻿import React, { useContext } from 'react'
+﻿import React, { useContext, useState } from 'react'
 import { FallingLines } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import useAllProducts from '../../CustomHooks/useAllProducts';
@@ -6,10 +6,15 @@ import { CartContext } from '../../Context/CartContext';
 
 export default function Products() {
   const sharedProducts = useAllProducts();
-
+  const [loadingProduct, setLoadingProduct] = useState({ id: null }); // {id}
   const { addProductToCart } = useContext(CartContext);
   async function handleAddProductToCart(id) {
-    await addProductToCart(id);
+    setLoadingProduct({ id: id });
+    try {
+      await addProductToCart(id);
+    } finally {
+      setLoadingProduct({ id: null });
+    }
   };
 
   if (sharedProducts.isLoading) {
@@ -92,11 +97,15 @@ export default function Products() {
                   </div>
                 </div>
                 <div className="product-button">
-                  <button onClick={() => handleAddProductToCart(product._id)} className='btn mx-auto text-center main-btn' type='button'>
-                    <span>
-                      <i className='fa-solid fa-cart-shopping'></i>
-                    </span>
-                    <span>Add to Cart</span>
+                  <button disabled={loadingProduct.id === product._id} onClick={() => handleAddProductToCart(product._id)} className='btn mx-auto text-center main-btn' type='button'>
+                    {loadingProduct.id !== product._id ? <div>
+                      <span>
+                        <i className='fa-solid fa-cart-shopping'></i>
+                      </span>
+                      <span>Add to Cart</span>
+                    </div> : <div>
+                      <span><i className="fa-solid fa-spinner fa-spin"></i></span>
+                    </div>}
                   </button>
                 </div>
               </div>

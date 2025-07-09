@@ -156,6 +156,13 @@
     transition: all .3s;
 }
 
+.loader-btn i {
+    color: #36bb70 !important;
+    font-weight: bold !important;
+    font-size: 30px !important;
+    padding: 0 40px !important;
+}
+
 .shop-cart .col-md-12 .product-details button span {
     font-size: 18px;
     font-weight: 300;
