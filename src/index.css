@@ -20,6 +20,41 @@ body {
   color: #22c55e;
 }
 
+.main-success-btn, .main-danger-btn {
+  background-color: transparent;
+  font-weight: 600;
+  border-radius: 5px;
+  margin: 10px auto;
+  padding: 5px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.15s ease-in-out;
+}
+
+.main-success-btn:hover, .main-danger-btn:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.main-success-btn, .main-danger-btn {
+  border: 1px solid #198754;
+  color: #198754;
+}
+
+.main-success-btn:hover {
+  background-color: #198754;
+}
+
+.main-danger-btn {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.main-danger-btn:hover {
+  background-color: #dc3545;
+}
+
 /* Navbar Styles */
 nav {
   display: flex;

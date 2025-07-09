@@ -31,6 +31,7 @@ export default function Login() {
           setSuccess(false);
           navigate('/home');
           localStorage.setItem('token', res.data.token)
+          localStorage.setItem('UserName', res.data.user.name)
           setToken(res.data.token);
         }, 1000);
         setTimeout(() => {

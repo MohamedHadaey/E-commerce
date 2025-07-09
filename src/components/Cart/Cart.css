@@ -1,0 +1,64 @@
+﻿#cart-section .container .row .col-md-12 h3 {
+    color: rgba(33, 37, 41, .75);
+    font-weight: bolder;
+    text-align: center;
+    font-size: 23px;
+}
+
+#cart-section .container .row .col-md-12 h3 span {
+    font-size: 21px;
+}
+
+#cart-section .container .row .col-md-12 .row .empty-cart-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cart-section .container .row .col-md-12 .row .empty-cart-image img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    /* Adjust as needed */
+    max-height: 400px;
+    /* Adjust as needed */
+    object-fit: contain;
+    /* Maintain aspect ratio */
+}
+
+#cart-section .container .row .col-md-12 .row .cart-actions-card .card {
+    border: 2px solid #36bb70;
+    width: 320px;
+    padding: 30px 15px;
+}
+
+#cart-section .container .row .col-md-12 .row .cart-actions-card .card h4 {
+    color: #555;
+    font-weight: bold;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+#cart-section .container .row .col-md-12 .row .cart-actions-card .card p {
+    margin-bottom: 10px;
+}
+
+#cart-section .container .row .col-md-12 .row .cart-actions-card .card p:last-of-type {
+    margin-bottom: 40px;
+}
+
+#cart-section .container .row .col-md-12 .row .cart-actions-card .card p strong {
+    color: #333;
+    width: 100px;
+    display: inline-block;
+}
+
+#cart-section .container .row .col-md-12 .row .cart-actions-card .card p span {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(25, 135, 84);
+}
