@@ -13,6 +13,7 @@ export default function Checkout() {
         details: '',
         phone: '',
         city: '',
+        paymentMethod: '', // new field
     };
     const [isSuccess, setSuccess] = useState(false);
     const [isSubmitted, setSubmitted] = useState(false);
@@ -23,7 +24,7 @@ export default function Checkout() {
 
     const checkOutForm = useFormik({
         initialValues: cashOrderObject,
-        onSubmit: createCashOrder,
+        onSubmit: detectPaymentMethod,
         validationSchema: Yup.object({
             details: Yup.string()
                 .required('Please enter your address')
@@ -37,8 +38,20 @@ export default function Checkout() {
                 .matches(/^[A-Za-z ]+$/, 'City must contain only letters')
                 .min(2, 'City must be at least 2 characters')
                 .max(30, 'City must be at most 30 characters'),
+            paymentMethod: Yup.string()
+                .required('Please select a payment method'),
         }),
     });
+
+    function detectPaymentMethod(values) {
+        const { paymentMethod, ...shippingValues } = values;
+
+        if (paymentMethod === 'cash') {
+            createCashOrder(shippingValues);
+        } else if (paymentMethod === 'card') {
+            createCardOrder(shippingValues);
+        }
+    }
 
     async function createCashOrder(values) {
         const headers = {
@@ -47,9 +60,6 @@ export default function Checkout() {
         const body = {
             shippingAddress: values
         }
-        console.log('body', body)
-        console.log('headers', headers);
-        console.log('cartId', id)
         setSubmitted(true);
         axios.post(`https://ecommerce.routemisr.com/api/v1/orders/${id}`, body, { headers })
             .then((response) => {
@@ -59,7 +69,7 @@ export default function Checkout() {
                 checkOutForm.resetForm();
                 setTimeout(() => {
                     setSuccess(false);
-                    navigate('/home');
+                    navigate('/allorders');
                     clearCartUI();
                 }, 2000);
             })
@@ -70,6 +80,34 @@ export default function Checkout() {
                 setTimeout(() => {
                     setErrorMessage(null);
                 }, 3000);
+            })
+    }
+
+    async function createCardOrder(values) {
+        const headers = {
+            token: localStorage.getItem('token')
+        }
+        const params = {
+            url: 'https://localhost:5173'
+        }
+        const body = {
+            shippingAddress: values
+        }
+        setSubmitted(true);
+        axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}`, body, { headers, params })
+            .then((response) => {
+                setSubmitted(false);
+                checkOutForm.resetForm();
+                clearCartUI();
+                window.open(response.data.session.url, '_self');
+            })
+            .catch((error) => {
+                setSuccess(false);
+                setSubmitted(false);
+                setErrorMessage(error.response.data.message);
+                setTimeout(() => {
+                    setErrorMessage(null);
+                }, 5000);
             })
     }
 
@@ -121,6 +159,56 @@ export default function Checkout() {
                                 {checkOutForm.errors.city}
                             </div>)}
                         </div>
+
+                        <div className="mb-5">
+                            <label className="block mb-2 text-sm font-medium text-gray-900">Payment Method</label>
+                            <div className="flex gap-6">
+                                <label className="flex items-center hover:cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="paymentMethod"
+                                        value="card"
+                                        checked={checkOutForm.values.paymentMethod === 'card'}
+                                        onChange={checkOutForm.handleChange}
+                                        className="mr-2"
+                                        required
+                                        style={{
+                                            accentColor: '#36bb70',
+                                            width: '20px',
+                                            height: '20px',
+                                            boxShadow: 'none',
+                                            borderRadius: '50%',
+                                        }}
+                                    />
+                                    Pay by card
+                                </label>
+                                <label className="flex items-center hover:cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="paymentMethod"
+                                        value="cash"
+                                        checked={checkOutForm.values.paymentMethod === 'cash'}
+                                        onChange={checkOutForm.handleChange}
+                                        className="mr-2"
+                                        required
+                                        style={{
+                                            accentColor: '#36bb70',
+                                            width: '20px',
+                                            height: '20px',
+                                            boxShadow: 'none',
+                                            borderRadius: '50%',
+                                        }}
+                                    />
+                                    Cash on delivery
+                                </label>
+                            </div>
+                            {checkOutForm.errors.paymentMethod && (checkOutForm.submitCount > 0 || checkOutForm.touched.paymentMethod) && (
+                                <div className="p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                                    {checkOutForm.errors.paymentMethod}
+                                </div>
+                            )}
+                        </div>
+
                         <button type="submit" disabled={isSubmitted || isSuccess} className="text-white main-btn  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             {!isSubmitted ? 'Submit Payment' : <ColorRing
                                 visible={true}
