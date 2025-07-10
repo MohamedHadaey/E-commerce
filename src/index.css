@@ -617,3 +617,51 @@ form button:focus {
   font-weight: 200;
   max-width: 85%;
 }
+
+/* Handle media queries */
+@media screen and (max-width : 350px) {
+  #checkout-section .container form {
+    order: 2;
+  }
+
+  #checkout-section .container .flex>img {
+    max-width: 300px;
+  }
+}
+
+@media screen and (min-width:350px) and (max-width:576px) {
+  #checkout-section .container form {
+    order: 2;
+  }
+
+  #checkout-section .container .flex>img {
+    max-width: 300px;
+  }
+}
+
+@media screen and (min-width:577px) and (max-width:768px) {
+  #checkout-section .container form {
+    order: 2;
+  }
+
+  #checkout-section .container .flex>img {
+    max-width: 300px;
+  }
+}
+
+@media screen and (min-width:769px) and (max-width:992px) {
+  #checkout-section .container form {
+    order: 2;
+  }
+
+  #checkout-section .container .flex>img {
+    max-width: 300px;
+  }
+}
+
+/* start extra extra large screen */
+@media screen and (min-width:992px) and (max-width:1201px) {}
+
+@media screen and (min-width:992px) and (max-width:1201px) {}
+
+@media screen and (min-width:1220px) and (max-width:1680px) {}
