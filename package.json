@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.8",
     "axios": "^1.9.0",
     "formik": "^2.4.6",
+    "mkcert": "^3.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hot-toast": "^2.5.2",
