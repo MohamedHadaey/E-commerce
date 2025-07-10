@@ -29,6 +29,7 @@ export default function Navbar() {
           <Link to="/products" className={`navbar-link${isActive("/products") ? " active" : ""}`}>Products</Link>
           <Link to="/categories" className={`navbar-link${isActive("/categories") ? " active" : ""}`}>Categories</Link>
           <Link to="/brands" className={`navbar-link${isActive("/brands") ? " active" : ""}`}>Brands</Link>
+          <Link to="/allorders" className={`navbar-link${isActive("/allorders") ? " active" : ""}`}>Orders</Link>
         </div>
       </div>
       {/* Right side: Social Icons */}
