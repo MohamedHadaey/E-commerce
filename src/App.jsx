@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Layout from './Components/Layout/Layout';
 import Home from './components/Home/Home';
-import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Notfound from './components/Notfound/Notfound';
 import Categories from './Components/Categories/Categories';
@@ -16,6 +15,7 @@ import Products from './components/Products/Products';
 import CartContextProvider from './Context/CartContext';
 import { Toaster } from 'react-hot-toast';
 import Checkout from './components/Checkout/Checkout';
+import Login from './components/Login/Login';
 
 function App() {
   const router = createBrowserRouter([
@@ -53,7 +53,7 @@ function App() {
           </ProtectedRoute>
         },
         {
-          path: 'checkout', element: <ProtectedRoute>
+          path: 'checkout/:id', element: <ProtectedRoute>
             <Checkout />
           </ProtectedRoute>
         },

@@ -47,6 +47,7 @@ export default function CartContextProvider({ children }) {
             setProducts(response.data.data.products);
             setTotalCartPrice(response.data.data.totalCartPrice);
             setCartId(response.data.data._id);
+            console.log('response.data.data._id', response.data.data._id)
         }).catch((error) => {
             console.log('ERROR.data getUserCart', error);
         })
@@ -85,6 +86,7 @@ export default function CartContextProvider({ children }) {
             });
     }
 
+    // This function clears the shopping cart by sending a DELETE request to the specified API endpoint.
     async function clearCart() {
         let headers = { token: localStorage.getItem('token') };
         return axios.delete(`https://ecommerce.routemisr.com/api/v1/cart`, { headers })
@@ -98,8 +100,16 @@ export default function CartContextProvider({ children }) {
             });
     }
 
+
+    // This function clears the shopping cart by setting the number of cart items, products list, and total cart price to zero.
+    async function clearCartUI() {
+        setNumOfCartItems(0);
+        setProducts(null);
+        setTotalCartPrice(0);
+    }
+
     return <>
-        <CartContext.Provider value={{ addProductToCart, numOfCartItems, products, totalCartPrice, getUserCart, updateCount, deleteProduct, clearCart, cartId }}>
+        <CartContext.Provider value={{ addProductToCart, numOfCartItems, products, totalCartPrice, getUserCart, updateCount, deleteProduct, clearCart, cartId, clearCartUI }}>
             {children}
         </CartContext.Provider>
     </>

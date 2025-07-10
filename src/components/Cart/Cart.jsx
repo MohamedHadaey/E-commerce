@@ -9,7 +9,7 @@ export default function Cart() {
   // Using useContext to access CartContext which provides cart-related data and functions
   // This includes functions to get the user's cart, number of items in the cart, products in the cart, total cart price, and a function to update the count of products in the cart.
   // The useState hook is used to manage the loading state of product count updates.
-  const { getUserCart, numOfCartItems, products, totalCartPrice, updateCount, deleteProduct, clearCart } = useContext(CartContext);
+  const { getUserCart, numOfCartItems, products, totalCartPrice, updateCount, deleteProduct, clearCart, cartId } = useContext(CartContext);
   // State to manage the loading state of product count updates
   // It holds an object with the product ID and the type of update ('inc' for increment, 'dec' for decrement).
   // This is used to show a loading spinner while the count is being updated.
@@ -17,6 +17,7 @@ export default function Cart() {
   const [loadingClearCart, setLoadingClearCart] = useState(false);
   const username = localStorage.getItem('UserName');
 
+ 
   // useEffect hook to call getUserCart when the component mounts
   // This will fetch the user's cart data and update the state accordingly.
   useEffect(() => {
@@ -93,7 +94,7 @@ export default function Cart() {
                     <p>
                       <strong>Total Price:</strong> <span>{totalCartPrice} EGP</span>
                     </p>
-                    <Link to="/checkout" >
+                    <Link to={`/checkout/${cartId}`} >
                     <button type="button" className="main-success-btn w-3/4">
                       CheckOut
                     </button>
