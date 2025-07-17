@@ -62,8 +62,7 @@ export default function Checkout() {
         }
         setSubmitted(true);
         axios.post(`https://ecommerce.routemisr.com/api/v1/orders/${id}`, body, { headers })
-            .then((response) => {
-                console.log('response', response)
+            .then(() => {
                 setSuccess(true);
                 setSubmitted(false);
                 checkOutForm.resetForm();

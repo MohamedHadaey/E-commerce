@@ -44,14 +44,12 @@ export default function Cart() {
     // In case of an error, it displays an error message.
     setLoadingProduct({ id: productId, type: "delete" });
     const responseFlag = await deleteProduct(productId);
-    console.log('responseFlag', responseFlag)
     if (responseFlag) {
       setLoadingProduct({ id: null, type: null });
       // If the product deletion is successful, you can perform any additional actions here, like showing a success message or updating the UI.
       toast.success('Product deleted successfully');
     } else {
       setLoadingProduct({ id: null, type: null });
-      console.log('Failed to delete the product');
     }
   }
 
@@ -79,7 +77,7 @@ export default function Cart() {
 
           <div className="col-md-12">
             <div className="row flex flex-col md:flex-row">
-              <div className={`p-8 mb-3 ${numOfCartItems === 0 ? 'w-full' : 'w-full md:w-2/3'}`}>
+              <div className={`p-8 mb-3 ${numOfCartItems == 0 ? 'w-full' : 'w-full md:w-2/3'}`}>
                 <div className="empty-cart-image">
                   <img src={emptyCartImg} alt="Empty Cart" className="img-fluid" />
                 </div>
