@@ -99,7 +99,7 @@
     align-items: flex-start;
     gap: 20px;
     padding: 15px 0;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     border-bottom: 1px solid #ccc;
 }
 

@@ -42,12 +42,10 @@ export default function CartContextProvider({ children }) {
             token: localStorage.getItem('token')
         }
         axios.get('https://ecommerce.routemisr.com/api/v1/cart', { headers }).then((response) => {
-            console.log('response.data getUserCart', response);
             setNumOfCartItems(response.data.numOfCartItems);
             setProducts(response.data.data.products);
             setTotalCartPrice(response.data.data.totalCartPrice);
             setCartId(response.data.data._id);
-            console.log('response.data.data._id', response.data.data._id)
         }).catch((error) => {
             console.log('ERROR.data getUserCart', error);
         })
@@ -90,13 +88,13 @@ export default function CartContextProvider({ children }) {
     async function clearCart() {
         let headers = { token: localStorage.getItem('token') };
         return axios.delete(`https://ecommerce.routemisr.com/api/v1/cart`, { headers })
-            .then((response) => {
-                setNumOfCartItems(response.data.numOfCartItems);
-                setProducts(response.data.data.products);
-                setTotalCartPrice(response.data.data.totalCartPrice);
+            .then(() => {
+                setNumOfCartItems(0);
+                setProducts([]);
+                setTotalCartPrice(0);
             })
             .catch((error) => {
-                toast.error(error.response.data.message);
+                toast.error(error.response?.data?.message);
             });
     }
 
