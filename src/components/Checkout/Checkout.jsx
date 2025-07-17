@@ -87,7 +87,7 @@ export default function Checkout() {
             token: localStorage.getItem('token')
         }
         const params = {
-            url: 'https://freshcart-ec.netlify.app'
+            url: 'https://localhost:5173'
         }
         const body = {
             shippingAddress: values
