@@ -17,6 +17,8 @@ import { Toaster } from 'react-hot-toast';
 import Checkout from './components/Checkout/Checkout';
 import Login from './components/Login/Login';
 import AllOrders from './components/allorders/allorders';
+import { reduxStore } from './Redux/reduxStore';
+import { Provider } from 'react-redux';
 
 function App() {
   const router = createBrowserRouter([
@@ -80,14 +82,16 @@ function App() {
 
   return (
     <>
-      <AuthContextProvider>
-        <QueryClientProvider client={ReactQueryConfig}>
-          <CartContextProvider>
-            <RouterProvider router={router} />
-            <Toaster />
-          </CartContextProvider>
-        </QueryClientProvider>
-      </AuthContextProvider>
+      <Provider store={reduxStore}>
+        <AuthContextProvider>
+          <QueryClientProvider client={ReactQueryConfig}>
+            <CartContextProvider>
+              <RouterProvider router={router} />
+              <Toaster />
+            </CartContextProvider>
+          </QueryClientProvider>
+        </AuthContextProvider>
+      </Provider>
     </>
   )
 }

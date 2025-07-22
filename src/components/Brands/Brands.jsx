@@ -2,9 +2,14 @@
 import '../Categories/Categories.css'
 import { ThreeCircles } from 'react-loader-spinner';
 import useAllBrands from '../../CustomHooks/useAllBrands';
+import { useSelector } from 'react-redux';
 
 export default function Brands() {
   const sharedBrands = useAllBrands();
+
+  const storeData = useSelector((store) => store)
+  console.log('storeData', storeData);
+
 
   if (sharedBrands.isLoading) {
     return <>
@@ -42,7 +47,7 @@ export default function Brands() {
               <p> Discover our featured brands, Click on any brand to view its dedicated page and explore their products!</p>
             </div>
             {sharedBrands.data.data.data.map((category) => {
-              return <div className="category-item" key={category.id}>
+              return <div className="category-item" key={category._id}>
                 <img src={category.image} className="w-full shadow-lg" alt={category.name} />
                 <span>{category.name}</span>
               </div>
