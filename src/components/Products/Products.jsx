@@ -1,8 +1,10 @@
-﻿import React, { useContext, useState } from 'react'
+﻿import React, { useContext, useEffect, useState } from 'react'
 import { FallingLines } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import useAllProducts from '../../CustomHooks/useAllProducts';
 import { CartContext } from '../../Context/CartContext';
+import { getAllProducts } from '../../Redux/apiSlice';
+import { useDispatch } from 'react-redux';
 
 export default function Products() {
   const sharedProducts = useAllProducts();
@@ -16,6 +18,12 @@ export default function Products() {
       setLoadingProduct({ id: null });
     }
   };
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [])
 
   if (sharedProducts.isLoading) {
     return <>
