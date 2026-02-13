@@ -1,10 +1,29 @@
-﻿import React from 'react'
+﻿import React, { useContext, useEffect, useState } from 'react'
 import { FallingLines } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import useAllProducts from '../../CustomHooks/useAllProducts';
+import { CartContext } from '../../Context/CartContext';
+import { getAllProducts } from '../../Redux/apiSlice';
+import { useDispatch } from 'react-redux';
 
 export default function Products() {
   const sharedProducts = useAllProducts();
+  const [loadingProduct, setLoadingProduct] = useState({ id: null }); // {id}
+  const { addProductToCart } = useContext(CartContext);
+  async function handleAddProductToCart(id) {
+    setLoadingProduct({ id: id });
+    try {
+      await addProductToCart(id);
+    } finally {
+      setLoadingProduct({ id: null });
+    }
+  };
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [])
 
   if (sharedProducts.isLoading) {
     return <>
@@ -84,6 +103,18 @@ export default function Products() {
                       </span>
                     </div>
                   </div>
+                </div>
+                <div className="product-button">
+                  <button disabled={loadingProduct.id === product._id} onClick={() => handleAddProductToCart(product._id)} className='btn mx-auto text-center main-btn' type='button'>
+                    {loadingProduct.id !== product._id ? <div>
+                      <span>
+                        <i className='fa-solid fa-cart-shopping'></i>
+                      </span>
+                      <span>Add to Cart</span>
+                    </div> : <div>
+                      <span><i className="fa-solid fa-spinner fa-spin"></i></span>
+                    </div>}
+                  </button>
                 </div>
               </div>
             )

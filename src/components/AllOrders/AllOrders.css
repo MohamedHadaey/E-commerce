@@ -1,0 +1,53 @@
+﻿.accordion {
+    background-color: transparent;
+}
+
+.accordion-item {
+    margin-bottom: 12px;
+    border-bottom: 0;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.Accordion-Trigger {
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.Accordion-Trigger:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.Accordion-Trigger[data-state="open"] {
+    background-color: #eee;
+}
+
+.t-price-span {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 3px solid #ccc;
+}
+
+.manage-order-btn {
+    color: #333;
+    font-weight: 600;
+    transition: all 0.2s;
+
+}
+
+.manage-order-btn:hover {
+    color: #22c55e;
+}
+
+.manage-order-btn i {
+    padding: 0 5px;
+    font-size: 20px;
+}
+
+.Accordion-Trigger:hover .manage-order-btn {
+    color: #22c55e;
+}

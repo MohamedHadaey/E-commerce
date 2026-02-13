@@ -1,10 +1,11 @@
-﻿import React from 'react';
+﻿import React, { useContext, useState } from 'react';
 import Slider from 'react-slick/lib/slider';
 import './ProductDetails.css';
 import { ThreeCircles } from 'react-loader-spinner';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { CartContext } from '../../Context/CartContext';
 
 export default function ProductDetails() {
     const settings = {
@@ -16,6 +17,18 @@ export default function ProductDetails() {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1
+    };
+
+    const { addProductToCart } = useContext(CartContext);
+    const [loadingProduct, setLoadingProduct] = useState(false);
+
+    async function handleAddProductToCart(id) {
+        setLoadingProduct(true);
+        try {
+            await addProductToCart(id);
+        } finally {
+            setLoadingProduct(false);
+        }
     };
 
     const { id } = useParams();
@@ -96,11 +109,15 @@ export default function ProductDetails() {
                                 </div>
                             </div>
                             <div className="product-details-actions">
-                                <button className='btn btn-primary w-full text-white text-center' type='button'>
-                                    <span>
-                                        <i className='fa-solid fa-cart-shopping'></i>
-                                    </span>
-                                    <span>Add to Cart</span>
+                                <button disabled={loadingProduct} className='btn btn-primary w-full text-white text-center' type='button' onClick={() => handleAddProductToCart(id)}>
+                                    {loadingProduct === false ? <div>
+                                        <span>
+                                            <i className='fa-solid fa-cart-shopping'></i>
+                                        </span>
+                                        <span>Add to Cart</span>
+                                    </div> : <div>
+                                        <span><i className="fa-solid fa-spinner fa-spin"></i></span>
+                                    </div>}
                                 </button>
                                 <button type='button'><span><i className='fa-regular fa-heart'></i></span></button>
                             </div>
