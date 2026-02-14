@@ -1,9 +1,11 @@
-﻿import React from 'react'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 import './Categories.css'
 import { ThreeCircles } from 'react-loader-spinner';
 import useAllCategories from '../../CustomHooks/useAllCategories';
 
 export default function Categories() {
+  const { t } = useTranslation();
   const sharedCategories = useAllCategories();
 
   if (sharedCategories.isLoading) {
@@ -12,8 +14,8 @@ export default function Categories() {
         <div className="container mx-auto py-10">
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-5 p-5">
             <div className="static-card">
-              <h3>Our Categories</h3>
-              <p> Discover a variety of categories, Click on any category to view its dedicated page and explore related products!</p>
+              <h3>{t('categories.ourCategories')}</h3>
+              <p>{t('categories.discover')}</p>
             </div>
           </div>
           <div className="static-card2">
@@ -38,8 +40,8 @@ export default function Categories() {
         <div className="container mx-auto py-10">
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-5 p-5">
             <div className="static-card">
-              <h3>Our Categories</h3>
-              <p> Discover a variety of categories, Click on any category to view its dedicated page and explore related products!</p>
+              <h3>{t('categories.ourCategories')}</h3>
+              <p>{t('categories.discover')}</p>
             </div>
             {sharedCategories.data.data.data.map((category) => {
               return <div className="category-item" key={category.id}>

@@ -1,8 +1,10 @@
-﻿import React from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
 import useAllCategories from "../../CustomHooks/useAllCategories";
 
 function CategoriesSliders() {
+    const { t } = useTranslation();
     const settings = {
         className: "center",
         centerMode: true,
@@ -27,13 +29,13 @@ function CategoriesSliders() {
 
     if (sharedCategories.isLoading) {
         return <>
-            <p>Loading...</p>
+            <p>{t('common.loading')}</p>
         </>
     }
 
     if (sharedCategories.isError) {
         return <>
-            <p>{sharedCategories.error.error.message}</p>
+            <p>{sharedCategories.error?.error?.message}</p>
         </>
     }
 

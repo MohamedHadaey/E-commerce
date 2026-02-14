@@ -1,4 +1,5 @@
-﻿import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick/lib/slider';
 import './ProductDetails.css';
 import { ThreeCircles } from 'react-loader-spinner';
@@ -8,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { CartContext } from '../../Context/CartContext';
 
 export default function ProductDetails() {
+    const { t } = useTranslation();
     const settings = {
         dots: true,
         arrows: false,
@@ -85,9 +87,9 @@ export default function ProductDetails() {
                             <h2>{product.title}</h2>
                             <p className='lg:w-3/4'>{product.description}</p>
                             <ul>
-                                <li><strong>Category: </strong> <span> {product.category.name} </span></li>
-                                <li><strong>Quantity: </strong> <span>{product.quantity}</span></li>
-                                <li className='brands'><strong>Brand: </strong> <span>{product.brand.name}</span></li>
+                                <li><strong>{t('productDetails.category')}: </strong> <span> {product.category.name} </span></li>
+                                <li><strong>{t('productDetails.quantity')}: </strong> <span>{product.quantity}</span></li>
+                                <li className='brands'><strong>{t('productDetails.brand')}: </strong> <span>{product.brand.name}</span></li>
                             </ul>
                             <div className='flex justify-between items-center w-full py-3'>
                                 <div className="price">
@@ -114,7 +116,7 @@ export default function ProductDetails() {
                                         <span>
                                             <i className='fa-solid fa-cart-shopping'></i>
                                         </span>
-                                        <span>Add to Cart</span>
+                                        <span>{t('productDetails.addToCart')}</span>
                                     </div> : <div>
                                         <span><i className="fa-solid fa-spinner fa-spin"></i></span>
                                     </div>}

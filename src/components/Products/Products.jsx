@@ -1,4 +1,5 @@
-﻿import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FallingLines } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import useAllProducts from '../../CustomHooks/useAllProducts';
@@ -7,9 +8,11 @@ import { getAllProducts } from '../../Redux/apiSlice';
 import { useDispatch } from 'react-redux';
 
 export default function Products() {
+  const { t } = useTranslation();
   const sharedProducts = useAllProducts();
-  const [loadingProduct, setLoadingProduct] = useState({ id: null }); // {id}
+  const [loadingProduct, setLoadingProduct] = useState({ id: null });
   const { addProductToCart } = useContext(CartContext);
+
   async function handleAddProductToCart(id) {
     setLoadingProduct({ id: id });
     try {
@@ -29,9 +32,9 @@ export default function Products() {
     return <>
       <div id="products" className='container mx-auto'>
         <div className="static-card">
-          <h3>Our Products</h3>
+          <h3>{t('products.ourProducts')}</h3>
           <p>
-            Browse our diverse collection. Click on any product to view its details and discover more!
+            {t('products.browseCollection')}
           </p>
         </div>
         <div className="spinner flex justify-center items-center w-full my-30">
@@ -50,13 +53,13 @@ export default function Products() {
     return <>
       <div id="products" className='container mx-auto'>
         <div className="static-card">
-          <h3>Our Products</h3>
+          <h3>{t('products.ourProducts')}</h3>
           <p>
-            Browse our diverse collection. Click on any product to view its details and discover more!
+            {t('products.browseCollection')}
           </p>
         </div>
         <div className="spinner flex justify-center items-center w-full my-30">
-          <p>fe error = {sharedProducts.error.error.message}</p>
+          <p>fe error = {sharedProducts.error?.error?.message}</p>
         </div>
       </div>
     </>
@@ -67,9 +70,9 @@ export default function Products() {
       <div id="products" className='container mx-auto py-8'>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-3">
           <div className="static-card">
-            <h3>Our Products</h3>
+            <h3>{t('products.ourProducts')}</h3>
             <p>
-              Browse our diverse collection. Click on any product to view its details and discover more!
+              {t('products.browseCollection')}
             </p>
           </div>
 
@@ -110,7 +113,7 @@ export default function Products() {
                       <span>
                         <i className='fa-solid fa-cart-shopping'></i>
                       </span>
-                      <span>Add to Cart</span>
+                      <span className="px-2">{t('products.addToCart')}</span>
                     </div> : <div>
                       <span><i className="fa-solid fa-spinner fa-spin"></i></span>
                     </div>}
@@ -124,9 +127,8 @@ export default function Products() {
     </>
   } else {
     return <>
-      {/* this logic of button for loading more products just for testing purpose  */}
       <div className='w-full  flex justify-center items-center '>
-        <button type='button' className='btn px-3 py-2 cursor-pointer rounded-l font-bold text-center bg-emerald-600 text-amber-50 w-50 mx-auto hover:bg-emerald-700 hover:text-amber-50 hover:border-amber-600' onClick={sharedProducts.refetch}>Load More Products</button>
+        <button type='button' className='btn px-3 py-2 cursor-pointer rounded-l font-bold text-center bg-emerald-600 text-amber-50 w-50 mx-auto hover:bg-emerald-700 hover:text-amber-50 hover:border-amber-600' onClick={sharedProducts.refetch}>{t('products.loadMore')}</button>
       </div>
     </>
   }
