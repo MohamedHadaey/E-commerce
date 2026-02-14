@@ -1,4 +1,5 @@
-﻿import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import HomeSliders from '../HomeSliders/HomeSliders';
 import fixedSliderImage1 from '../../assets/images/grocery-banner.png';
 import fixedSliderImage2 from '../../assets/images/grocery-banner-2.jpeg';
@@ -11,10 +12,12 @@ import { FallingLines } from 'react-loader-spinner';
 import { CartContext } from '../../Context/CartContext';
 
 export default function Home() {
-  const navigate = useNavigate(); // Add this line
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const sharedProducts = useAllProducts();
-  const [loadingProduct, setLoadingProduct] = useState({ id: null }); // {id}
+  const [loadingProduct, setLoadingProduct] = useState({ id: null });
   const { addProductToCart } = useContext(CartContext);
+
   async function handleAddProductToCart(id) {
     setLoadingProduct({ id: id });
     try {
@@ -32,17 +35,17 @@ export default function Home() {
         </div>
         <div className='w-[20%]'>
           <div className="fixed-images">
-            <img src={fixedSliderImage1} alt="fixed slider image" className='w-full' loading="lazy" />
-            <img src={fixedSliderImage2} alt="fixed slider image" className='w-full' loading="lazy" />
-            <img src={fixedSliderImage3} alt="fixed slider image" className='w-full' loading="lazy" />
+            <img src={fixedSliderImage1} alt={t('home.fixedSliderAlt')} className='w-full' loading="lazy" />
+            <img src={fixedSliderImage2} alt={t('home.fixedSliderAlt')} className='w-full' loading="lazy" />
+            <img src={fixedSliderImage3} alt={t('home.fixedSliderAlt')} className='w-full' loading="lazy" />
           </div>
         </div>
       </div>
       <div className="categories-sliders-section flex justify-start items-start gap-6 flex-col py-15">
         <div className="container mx-auto flex justify-between items-center mt-5 mb-3">
-          <h2 className='text-2xl font-medium text-center '>Our Categories</h2>
+          <h2 className='text-2xl font-medium text-center '>{t('home.ourCategories')}</h2>
           <span className='text-lg font-medium text-center cursor-pointer text-success' onClick={() => navigate('/categories')}>
-            See all categories
+            {t('home.seeAllCategories')}
           </span>
         </div>
         <div className="container mx-auto">
@@ -51,9 +54,9 @@ export default function Home() {
       </div>
       <div className="categories-sliders-section flex justify-start items-start gap-6 flex-col py-15">
         <div className="container mx-auto flex justify-between items-center mt-5 mb-3">
-          <h2 className='text-2xl font-medium text-center '>Our Products</h2>
+          <h2 className='text-2xl font-medium text-center '>{t('home.ourProducts')}</h2>
           <span className='text-lg font-medium text-center cursor-pointer text-success' onClick={() => navigate('/products')}>
-            See all products
+            {t('home.seeAllProducts')}
           </span>
         </div>
         {sharedProducts.data ? <div className="container mx-auto">
@@ -95,7 +98,7 @@ export default function Home() {
                         <span>
                           <i className='fa-solid fa-cart-shopping'></i>
                         </span>
-                        <span>Add to Cart</span>
+                        <span className="px-2">{t('home.addToCart')}</span>
                       </div> : <div>
                         <span><i className="fa-solid fa-spinner fa-spin"></i></span>
                       </div>}
